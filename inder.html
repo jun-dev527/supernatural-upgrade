@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Определи сверхъестественное существо</title>
+    <link rel="stylesheet" href="./css.css">
+</head>
+<body>
+    <div class="container">
+        <div class="notebook-page">
+            <h1>Определи, кто это?</h1>
+            <div class="form-group">
+                <h2>Признаки вампира</h2>
+                <ul>
+                    <li>Следы укусов на шее или запястьях</li>
+                    <li>Проверьте наличие удлиненных клыков</li>
+                    <li>Избегает солнечного света</li>
+                    <li>Не отражается в зеркале (миф)</li>
+                </ul>
+                <label>
+                    <input type="checkbox" id="vampire_signs"> Обнаружены?
+                </label>
+            </div>
+        </div>
+
+        <div class="notebook-page">
+            <div class="form-group">
+                <h2>Признаки демона</h2>
+                <ul>
+                    <li>Чувствуется запах серы</li>
+                    <li>Негативная реакция на святую воду (жжение, крики)</li>
+                    <li>Агрессивная реакция на имя Христа или религиозные символы</li>
+                    <li>Неестественная сила или изменения голоса</li>
+                </ul>
+                <label>
+                    <input type="checkbox" id="sulfur_smell"> Обнаружена?
+                </label>
+            </div>
+        </div>
+
+        <div class="notebook-page">
+            <div class="form-group">
+                <h2>Признаки призрака</h2>
+                <ul>
+                    <li>Связь с трагической историей места</li>
+                    <li>Ощущение холода или необъяснимые звуки</li>
+                    <li>Наблюдение полупрозрачных фигур или движущихся предметов</li>
+                    <li>Сообщения об обнаружении эктоплазмы (редко)</li>
+                </ul>
+                <label>
+                    <input type="checkbox" id="ectoplasm"> Обнаружены?
+                </label>
+            </div>
+        </div>
+
+        <div class="notebook-page final-page">
+            <div class="form-group">
+                <h2>Местоположение</h2>
+                <label for="location">Где вы находитесь?</label>
+                <select id="location">
+                    <option value="">Выберите местоположение</option>
+                    <option value="город">Город</option>
+                    <option value="лес">Лес</option>
+                    <option value="дом">Дом</option>
+                    <option value="кладбище">Кладбище</option>
+                    <option value="заброшенное место">Заброшенное место</option>
+                </select>
+            </div>
+            <button type="button" onclick="analyzeSigns()">Определить!</button>
+            <div id="result"></div>
+            <div id="exorcise"></div>
+        </div>
+    </div>
+
+    <script>
+        let identifiedCreature = ""; // Глобальная переменная для хранения типа существа
+
+        function analyzeSigns() {
+            const hasVampireSigns = document.getElementById("vampire_signs").checked;
+            const hasSulfur = document.getElementById("sulfur_smell").checked;
+            const hasEctoplasm = document.getElementById("ectoplasm").checked;
+            const location = document.getElementById("location").value;
+            const resultDiv = document.getElementById("result");
+            let resultText = "";
+
+            function locateGhostByPlace() {
+                if (location === "город" && hasEctoplasm) {
+                    resultText = "Маловероятно, что это призрак в городе.";
+                } else if (location === "лес" && hasEctoplasm) {
+                    resultText = "Призраки редко встречаются в лесу.";
+                } else if (location === "дом" && hasEctoplasm) {
+                    resultText = "Возможно, это призрак.";
+                    identifiedCreature = "ghost";
+                } else if (location === "кладбище" && hasEctoplasm) {
+                    resultText = "Вероятно, это призрак.";
+                    identifiedCreature = "ghost";
+                } else if (location === "заброшенное место" && hasEctoplasm) {
+                    resultText = "Весьма вероятно, это призрак.";
+                    identifiedCreature = "ghost";
+                }
+            }
+
+            function locateVampireByPlace() {
+                if (location === "город" && hasVampireSigns) {
+                    resultText = "Есть шанс, что это вампир, но это маловероятно";
+                    identifiedCreature = "vampire";
+                } else if (location === "лес" && hasVampireSigns) {
+                    resultText = "Вампиры могут скрываться в лесу.";
+                    identifiedCreature = "vampire";
+                } else if (location === "дом" && hasVampireSigns) {
+                    resultText = "Маловероятно, что это вампир в обычном доме.";
+                } else if (location === "кладбище" && hasVampireSigns) {
+                    resultText = "Вампиры не обитают на кладбищах.";
+                } else if (location === "заброшенное место" && hasVampireSigns) {
+                    resultText = "Вампиры могут обитать в заброшенных местах.";
+                    identifiedCreature = "vampire";
+                }
+            }
+
+            function locateDemonByPlace() {
+                if (location === "город" && hasSulfur) {
+                    resultText = "Возможно, это демон.";
+                    identifiedCreature = "demon";
+                } else if (location === "лес" && hasSulfur) {
+                    resultText = "Демоны могут появляться в лесу.";
+                    identifiedCreature = "demon";
+                } else if (location === "дом" && hasSulfur) {
+                    resultText = "Если вы чувствуете запах серы дома, это тревожный знак, но демоны не обитают в домах";
+                } else if (location === "кладбище" && hasSulfur) {
+                    resultText = "Запах серы на кладбище может указывать на демоническое присутствие.";
+                    identifiedCreature = "demon";
+                } else if (location === "заброшенное место" && hasSulfur) {
+                    resultText = "Заброшенные места могут привлекать демонов.";
+                    identifiedCreature = "demon";
+                }
+            }
+
+            function brainrot() {
+                if (hasVampireSigns && hasSulfur && hasEctoplasm) {
+                    resultText = "Похоже, вы столкнулись с чем-то совершенно необычным... или у вас очень богатая фантазия!";
+                }
+            }
+
+            brainrot();
+            if (!resultText) {
+                if (hasVampireSigns) {
+                    locateVampireByPlace();
+                } else if (hasSulfur) {
+                    locateDemonByPlace();
+                } else if (hasEctoplasm) {
+                    locateGhostByPlace();
+                } else {
+                    resultText = "Похоже, ничего сверхъестественного по этим признакам не обнаружено.";
+                }
+            }
+
+            resultDiv.innerHTML = "<p>" + resultText + "</p>";
+            printHowToExorcise(); // Вызываем функцию после определения
+        }
+
+        function printHowToExorcise() {
+            const exorciseDiv = document.getElementById("exorcise");
+            let exorciseText = "";
+
+            if (identifiedCreature === "vampire") {
+                exorciseText = "Чтобы упокоить вампира, нужно выстрелить ему в сердце серебряной пулей, либо вонзить осиновый кол в сердце.";
+            } else if (identifiedCreature === "demon") {
+                exorciseText = "Чтобы изгнать демона, его нужно заманить в ловушку и провести обряд экзорцизма.";
+            } else if (identifiedCreature === "ghost") {
+                exorciseText = "Чтобы упокоить призрака, можно сжечь его останки, посыпав солью, помочь ему отомстить за свою смерть или уничтожить предмет, к которому он привязан.";
+            } else {
+                exorciseText = "Способы борьбы с неопознанными сверхъестественными существами остаются на ваше усмотрение.";
+            }
+
+            exorciseDiv.innerHTML = "<p>Что делать дальше: " + exorciseText + "</p>";
+        }
+    </script>
+</body>
+</html>

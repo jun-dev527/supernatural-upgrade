@@ -1,0 +1,131 @@
+body {
+    font-family: 'Courier New', monospace; /* Классический шрифт печатной машинки */
+    background-color: #f0e6d2; /* Цвет старой бумаги */
+    margin: 0; /* Убираем стандартные отступы body */
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Центрируем по вертикали */
+    min-height: 100vh; /* Занимаем всю высоту экрана */
+}
+
+.container {
+    width: 90%; /* Занимаем большую часть ширины на разных устройствах */
+    max-width: 800px; /* Максимальная ширина контейнера */
+}
+
+.notebook-page {
+    background-color: #fff8e1; /* Более светлый оттенок страницы */
+    border: 2px solid #d4c4a1; /* Рамка страницы */
+    padding: 30px;
+    margin-bottom: 20px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2); /* Тень для эффекта объема */
+    position: relative; /* Для создания эффекта загнутого уголка */
+    border-radius: 5px; /* Небольшие скругления углов */
+}
+
+/* Эффект загнутого уголка */
+.notebook-page::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-top: 40px solid #c8b38b;
+    border-left: 40px solid transparent;
+    width: 0;
+    height: 0;
+    border-top-left-radius: 5px; /* Скругляем угол загиба */
+}
+
+.notebook-page h1 {
+    color: #8b4513; /* Коричневый цвет чернил для заголовка */
+    margin-top: 0;
+    margin-bottom: 20px;
+    text-align: center; /* Центрируем заголовок */
+}
+
+.notebook-page h2 {
+    color: #8b4513; /* Коричневый цвет чернил для подзаголовков */
+    border-bottom: 1px dashed #a0522d; /* Пунктирная линия под подзаголовком */
+    padding-bottom: 8px;
+    margin-top: 20px;
+}
+
+.notebook-page h2:first-child {
+    margin-top: 0; /* Убираем верхний отступ у первого h2 */
+}
+
+.notebook-page ul {
+    list-style-type: none; /* Убираем стандартные маркеры списка */
+    padding-left: 20px;
+    margin-bottom: 15px;
+}
+
+.notebook-page li::before {
+    content: '• '; /* Используем более заметный маркер */
+    color: #5e260d; /* Более темный коричневый для маркеров */
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #5e260d;
+}
+
+input[type="checkbox"] {
+    margin-right: 8px;
+    vertical-align: middle; /* Выравниваем чекбокс по центру текста */
+}
+
+select {
+    padding: 10px;
+    border: 1px solid #a0522d;
+    border-radius: 3px;
+    font-family: 'Courier New', monospace;
+    width: 100%; /* Занимает всю ширину контейнера */
+    box-sizing: border-box; /* Учитываем padding и border в ширине */
+    margin-top: 5px;
+}
+
+button {
+    padding: 12px 20px;
+    background-color: #a0522d; /* Коричневый цвет кнопки */
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    font-size: 1em; /* Немного увеличим шрифт кнопки */
+    transition: background-color 0.3s ease; /* Плавный переход цвета при наведении */
+    display: block; /* Чтобы кнопка занимала всю ширину */
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 20px;
+}
+
+button:hover {
+    background-color: #8b4513;
+}
+
+#result {
+    margin-top: 30px;
+    padding: 15px;
+    border: 1px solid #a0522d;
+    background-color: #ffe4c4; /* Светло-бежевый для результата */
+    border-radius: 5px;
+    font-weight: bold;
+    color: #5e260d;
+    white-space: pre-line; /* Сохраняем переносы строк */
+}
+
+.final-page {
+    margin-bottom: 40px; /* Увеличим отступ у последней страницы */
+}
